@@ -76,12 +76,12 @@ namespace busline_project.Data
 
             modelBuilder.Entity<User>()
                 .Property(u => u.CreatedAt)
-                .HasDefaultValueSql("GETUTCDATE()");
+                .HasDefaultValueSql("UTC_TIMESTAMP()");
 
             modelBuilder.Entity<User>()
                 .Property(u => u.UpdatedAt)
                 .ValueGeneratedOnAddOrUpdate()
-                .HasDefaultValueSql("GETUTCDATE()");
+                .HasDefaultValueSql("UTC_TIMESTAMP()");
 
             // ────────────────────────────────────────────────
             // 2. VehicleType - Vehicle - SeatTemplate
@@ -199,7 +199,7 @@ namespace busline_project.Data
 
             modelBuilder.Entity<Booking>()
                 .Property(b => b.BookingTime)
-                .HasDefaultValueSql("GETUTCDATE()");
+                .HasDefaultValueSql("UTC_TIMESTAMP()");
 
             // Ticket
             modelBuilder.Entity<Ticket>()
