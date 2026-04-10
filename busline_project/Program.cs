@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(
+    options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
@@ -45,6 +45,8 @@ if (!app.Environment.IsEnvironment("Production"))
 {
     app.UseHttpsRedirection();
 }
+
+app.MapGet("/health", () => Results.Ok(new { status = "healthy" }));
 
 app.UseCors("AllowFrontend");
 

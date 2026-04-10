@@ -2,7 +2,6 @@ using busline_project.Data;
 using busline_project.Dtos;
 using busline_project.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace busline_project.Controllers
@@ -31,42 +30,47 @@ namespace busline_project.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult> GetById(int id)
         {
-            var data = await _context.Set<VehicleSeatDto>()
-                .FromSqlRaw("EXEC GetVehicleWithSeats @VehicleId",
-                    new SqlParameter("@VehicleId", id))
-                .ToListAsync();
+            var vehicle = await _context.Vehicles
+                .AsNoTracking()
+                .Include(v => v.VehicleType)
+                .Where(v => v.Id == id)
+                .Select(v => new VehicleDetailResponse
+                {
+                    VehicleId = v.Id,
+                    LicensePlate = v.LicensePlate,
+                    Brand = v.Brand ?? string.Empty,
+                    ManufactureYear = v.ManufactureYear,
+                    Status = v.Status.ToString(),
+                    VehicleType = new VehicleTypeInfo
+                    {
+                        VehicleTypeId = v.VehicleType.Id,
+                        TypeName = v.VehicleType.TypeName,
+                        TotalSeats = v.VehicleType.TotalSeats
+                    },
+                    Seats = _context.SeatTemplates
+                        .Where(st => st.VehicleTypeId == v.VehicleTypeId)
+                        .OrderBy(st => st.Deck)
+                        .ThenBy(st => st.RowIndex)
+                        .ThenBy(st => st.ColIndex)
+                        .Select(st => new SeatInfo
+                        {
+                            SeatTemplateId = st.Id,
+                            SeatCode = st.SeatCode,
+                            RowIndex = st.RowIndex,
+                            ColIndex = st.ColIndex,
+                            Deck = st.Deck,
+                            SeatType = st.SeatType
+                        })
+                        .ToList()
+                })
+                .FirstOrDefaultAsync();
 
-            if (data == null || data.Count == 0)
+            if (vehicle == null)
             {
                 return NotFound();
             }
 
-            var first = data[0];
-            var result = new VehicleDetailResponse
-            {
-                VehicleId = first.VehicleId,
-                LicensePlate = first.LicensePlate,
-                Brand = first.Brand,
-                ManufactureYear = first.ManufactureYear,
-                Status = first.Status,
-                VehicleType = new VehicleTypeInfo
-                {
-                    VehicleTypeId = first.VehicleTypeId,
-                    TypeName = first.TypeName,
-                    TotalSeats = first.TotalSeats
-                },
-                Seats = data.Select(s => new SeatInfo
-                {
-                    SeatTemplateId = s.SeatTemplateId,
-                    SeatCode = s.SeatCode,
-                    RowIndex = s.RowIndex,
-                    ColIndex = s.ColIndex,
-                    Deck = s.Deck,
-                    SeatType = s.SeatType
-                }).ToList()
-            };
-
-            return Ok(result);
+            return Ok(vehicle);
         }
 
         [HttpPost]

@@ -1,0 +1,19 @@
+databases:
+  - name: busline-project-db
+    databaseName: busline_project
+    user: busline_project_user
+
+services:
+  - type: web
+    name: busline-project-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    healthCheckPath: /health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__DefaultConnection
+        fromDatabase:
+          name: busline-project-db
+          property: connectionString

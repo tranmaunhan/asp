@@ -1,5 +1,4 @@
-﻿using busline_project.Dtos;
-using busline_project.Models;
+﻿using busline_project.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace busline_project.Data
@@ -17,7 +16,6 @@ namespace busline_project.Data
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Role> Roles { get; set; } = null!;
         public DbSet<UserRole> UserRoles { get; set; } = null!;
-        public DbSet<VehicleSeatDto> VehicleSeatDtos { get; set; }
 
         // ────────────────────────────────────────────────
         // DbSets - Phần Xe & Ghế
@@ -45,7 +43,6 @@ namespace busline_project.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<VehicleSeatDto>().HasNoKey();
             modelBuilder.Entity<UserRole>()
                 .HasKey(ur => new { ur.UserId, ur.RoleId });
 
@@ -76,12 +73,12 @@ namespace busline_project.Data
 
             modelBuilder.Entity<User>()
                 .Property(u => u.CreatedAt)
-                .HasDefaultValueSql("GETUTCDATE()");
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             modelBuilder.Entity<User>()
                 .Property(u => u.UpdatedAt)
                 .ValueGeneratedOnAddOrUpdate()
-                .HasDefaultValueSql("GETUTCDATE()");
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             // ────────────────────────────────────────────────
             // 2. VehicleType - Vehicle - SeatTemplate
@@ -199,7 +196,7 @@ namespace busline_project.Data
 
             modelBuilder.Entity<Booking>()
                 .Property(b => b.BookingTime)
-                .HasDefaultValueSql("GETUTCDATE()");
+                .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             // Ticket
             modelBuilder.Entity<Ticket>()
