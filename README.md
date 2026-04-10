@@ -8,7 +8,7 @@ If your port is different, update the Postman variable `baseUrl`.
 ## Prerequisites
 
 - .NET SDK (net8.0)
-- SQL Server (or your configured connection in `busline_project/appsettings.json`)
+- PostgreSQL (or your configured connection in `busline_project/appsettings.json`)
 
 ## Run
 
@@ -70,3 +70,33 @@ Import the collection file:
 `busline_project.postman_collection.json`
 
 Then update the collection variable `baseUrl` if needed.
+
+## Deploy on Render
+
+Repository now includes the required deployment files for Render:
+
+- `Dockerfile`
+- `.dockerignore`
+- `render.yaml`
+
+### Recommended setup
+
+1. Push this repository to GitHub.
+2. In Render, create a new **Blueprint** service from the repository, or create a **Web Service** that uses the included `Dockerfile`.
+3. If you use the included `render.yaml`, Render will provision PostgreSQL and inject `ConnectionStrings__DefaultConnection` automatically.
+4. If you create the service manually instead of using Blueprint, create a Render PostgreSQL database and set `ConnectionStrings__DefaultConnection` yourself.
+
+Example connection string:
+
+```text
+Host=<host>;Port=5432;Database=<database>;Username=<user>;Password=<password>;SSL Mode=Require;Trust Server Certificate=true
+```
+
+### Notes
+
+- Render will use the `/health` endpoint for health checks.
+- The app listens on Render's `PORT` automatically through the container entrypoint.
+- Swagger is disabled in Production by the current app configuration.
+- This project now uses PostgreSQL via Entity Framework Core.
+- The included `render.yaml` provisions a managed PostgreSQL database in Render and injects its connection string into the web service.
+"# deploycsharp" 
