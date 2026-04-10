@@ -1,0 +1,795 @@
+{
+  "info": {
+    "name": "Busline Project API",
+    "_postman_id": "0b0c7c2f-7c6f-4c8b-b4e9-67f2e7c6d7a1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:5001"
+    }
+  ],
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Users"
+          }
+        },
+        {
+          "name": "Get User By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Users/1"
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"user1\",\n  \"passwordHash\": \"hash\",\n  \"fullName\": \"User One\",\n  \"email\": \"user1@example.com\",\n  \"phone\": \"0123456789\",\n  \"status\": 0\n}"
+            },
+            "url": "{{baseUrl}}/Users"
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"username\": \"user1\",\n  \"passwordHash\": \"hash\",\n  \"fullName\": \"User One\",\n  \"email\": \"user1@example.com\",\n  \"phone\": \"0123456789\",\n  \"status\": 0\n}"
+            },
+            "url": "{{baseUrl}}/Users/1"
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/Users/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "Get All Roles",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Roles"
+          }
+        },
+        {
+          "name": "Get Role By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Roles/1"
+          }
+        },
+        {
+          "name": "Create Role",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roleName\": \"Admin\",\n  \"description\": \"Administrator\"\n}"
+            },
+            "url": "{{baseUrl}}/Roles"
+          }
+        },
+        {
+          "name": "Update Role",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"roleName\": \"Admin\",\n  \"description\": \"Administrator\"\n}"
+            },
+            "url": "{{baseUrl}}/Roles/1"
+          }
+        },
+        {
+          "name": "Delete Role",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/Roles/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "UserRoles",
+      "item": [
+        {
+          "name": "Get All UserRoles",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/UserRoles"
+          }
+        },
+        {
+          "name": "Get UserRole By Keys",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/UserRoles/1/1"
+          }
+        },
+        {
+          "name": "Create UserRole",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"roleId\": 1\n}"
+            },
+            "url": "{{baseUrl}}/UserRoles"
+          }
+        },
+        {
+          "name": "Update UserRole",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"roleId\": 1\n}"
+            },
+            "url": "{{baseUrl}}/UserRoles/1/1"
+          }
+        },
+        {
+          "name": "Delete UserRole",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/UserRoles/1/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "VehicleTypes",
+      "item": [
+        {
+          "name": "Get All VehicleTypes",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/VehicleTypes"
+          }
+        },
+        {
+          "name": "Get VehicleType By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/VehicleTypes/1"
+          }
+        },
+        {
+          "name": "Create VehicleType",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"typeName\": \"Limousine 34 seats\",\n  \"totalSeats\": 34\n}"
+            },
+            "url": "{{baseUrl}}/VehicleTypes"
+          }
+        },
+        {
+          "name": "Update VehicleType",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"typeName\": \"Limousine 34 seats\",\n  \"totalSeats\": 34\n}"
+            },
+            "url": "{{baseUrl}}/VehicleTypes/1"
+          }
+        },
+        {
+          "name": "Delete VehicleType",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/VehicleTypes/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vehicles",
+      "item": [
+        {
+          "name": "Get All Vehicles",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Vehicles"
+          }
+        },
+        {
+          "name": "Get Vehicle By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Vehicles/1"
+          }
+        },
+        {
+          "name": "Create Vehicle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"licensePlate\": \"51A-12345\",\n  \"brand\": \"Hyundai\",\n  \"manufactureYear\": 2020,\n  \"vehicleTypeId\": 1,\n  \"status\": 0\n}"
+            },
+            "url": "{{baseUrl}}/Vehicles"
+          }
+        },
+        {
+          "name": "Update Vehicle",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"licensePlate\": \"51A-12345\",\n  \"brand\": \"Hyundai\",\n  \"manufactureYear\": 2020,\n  \"vehicleTypeId\": 1,\n  \"status\": 0\n}"
+            },
+            "url": "{{baseUrl}}/Vehicles/1"
+          }
+        },
+        {
+          "name": "Delete Vehicle",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/Vehicles/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "SeatTemplates",
+      "item": [
+        {
+          "name": "Get All SeatTemplates",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/SeatTemplates"
+          }
+        },
+        {
+          "name": "Get SeatTemplate By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/SeatTemplates/1"
+          }
+        },
+        {
+          "name": "Create SeatTemplate",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vehicleTypeId\": 1,\n  \"seatCode\": \"A1\",\n  \"rowIndex\": 1,\n  \"colIndex\": 1\n}"
+            },
+            "url": "{{baseUrl}}/SeatTemplates"
+          }
+        },
+        {
+          "name": "Update SeatTemplate",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"vehicleTypeId\": 1,\n  \"seatCode\": \"A1\",\n  \"rowIndex\": 1,\n  \"colIndex\": 1\n}"
+            },
+            "url": "{{baseUrl}}/SeatTemplates/1"
+          }
+        },
+        {
+          "name": "Delete SeatTemplate",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/SeatTemplates/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Locations",
+      "item": [
+        {
+          "name": "Get All Locations",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Locations"
+          }
+        },
+        {
+          "name": "Get Location By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Locations/1"
+          }
+        },
+        {
+          "name": "Create Location",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ben xe Mien Dong\",\n  \"address\": \"292 Dinh Bo Linh\",\n  \"type\": 0\n}"
+            },
+            "url": "{{baseUrl}}/Locations"
+          }
+        },
+        {
+          "name": "Update Location",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"name\": \"Ben xe Mien Dong\",\n  \"address\": \"292 Dinh Bo Linh\",\n  \"type\": 0\n}"
+            },
+            "url": "{{baseUrl}}/Locations/1"
+          }
+        },
+        {
+          "name": "Delete Location",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/Locations/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Routes",
+      "item": [
+        {
+          "name": "Get All Routes",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Routes"
+          }
+        },
+        {
+          "name": "Get Route By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Routes/1"
+          }
+        },
+        {
+          "name": "Create Route",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"originId\": 1,\n  \"destinationId\": 2,\n  \"distanceKm\": 300,\n  \"estimatedDurationMinutes\": 360\n}"
+            },
+            "url": "{{baseUrl}}/Routes"
+          }
+        },
+        {
+          "name": "Update Route",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"originId\": 1,\n  \"destinationId\": 2,\n  \"distanceKm\": 300,\n  \"estimatedDurationMinutes\": 360\n}"
+            },
+            "url": "{{baseUrl}}/Routes/1"
+          }
+        },
+        {
+          "name": "Delete Route",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/Routes/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "RouteStops",
+      "item": [
+        {
+          "name": "Get All RouteStops",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/RouteStops"
+          }
+        },
+        {
+          "name": "Get RouteStop By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/RouteStops/1"
+          }
+        },
+        {
+          "name": "Create RouteStop",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"routeId\": 1,\n  \"locationId\": 3,\n  \"stopOrder\": 2,\n  \"distanceFromStartKm\": 120,\n  \"estimatedTimeFromStartMinutes\": 140\n}"
+            },
+            "url": "{{baseUrl}}/RouteStops"
+          }
+        },
+        {
+          "name": "Update RouteStop",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"routeId\": 1,\n  \"locationId\": 3,\n  \"stopOrder\": 2,\n  \"distanceFromStartKm\": 120,\n  \"estimatedTimeFromStartMinutes\": 140\n}"
+            },
+            "url": "{{baseUrl}}/RouteStops/1"
+          }
+        },
+        {
+          "name": "Delete RouteStop",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/RouteStops/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trips",
+      "item": [
+        {
+          "name": "Get All Trips",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Trips"
+          }
+        },
+        {
+          "name": "Get Trip By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Trips/1"
+          }
+        },
+        {
+          "name": "Create Trip",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"routeId\": 1,\n  \"vehicleId\": 1,\n  \"departureTime\": \"2026-03-27T08:00:00Z\",\n  \"status\": 0\n}"
+            },
+            "url": "{{baseUrl}}/Trips"
+          }
+        },
+        {
+          "name": "Update Trip",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"routeId\": 1,\n  \"vehicleId\": 1,\n  \"departureTime\": \"2026-03-27T08:00:00Z\",\n  \"status\": 0\n}"
+            },
+            "url": "{{baseUrl}}/Trips/1"
+          }
+        },
+        {
+          "name": "Delete Trip",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/Trips/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "TripSeats",
+      "item": [
+        {
+          "name": "Get All TripSeats",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/TripSeats"
+          }
+        },
+        {
+          "name": "Get TripSeat By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/TripSeats/1"
+          }
+        },
+        {
+          "name": "Create TripSeat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tripId\": 1,\n  \"seatTemplateId\": 1,\n  \"status\": 0\n}"
+            },
+            "url": "{{baseUrl}}/TripSeats"
+          }
+        },
+        {
+          "name": "Update TripSeat",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"tripId\": 1,\n  \"seatTemplateId\": 1,\n  \"status\": 0\n}"
+            },
+            "url": "{{baseUrl}}/TripSeats/1"
+          }
+        },
+        {
+          "name": "Delete TripSeat",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/TripSeats/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Get All Bookings",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Bookings"
+          }
+        },
+        {
+          "name": "Get Booking By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Bookings/1"
+          }
+        },
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"bookingTime\": \"2026-03-27T08:30:00Z\",\n  \"status\": 0,\n  \"totalAmount\": 150000\n}"
+            },
+            "url": "{{baseUrl}}/Bookings"
+          }
+        },
+        {
+          "name": "Update Booking",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"userId\": 1,\n  \"bookingTime\": \"2026-03-27T08:30:00Z\",\n  \"status\": 0,\n  \"totalAmount\": 150000\n}"
+            },
+            "url": "{{baseUrl}}/Bookings/1"
+          }
+        },
+        {
+          "name": "Delete Booking",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/Bookings/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tickets",
+      "item": [
+        {
+          "name": "Get All Tickets",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Tickets"
+          }
+        },
+        {
+          "name": "Get Ticket By Id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/Tickets/1"
+          }
+        },
+        {
+          "name": "Create Ticket",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingId\": 1,\n  \"tripId\": 1,\n  \"tripSeatId\": 1,\n  \"pickupStopId\": 1,\n  \"dropoffStopId\": 2,\n  \"price\": 150000\n}"
+            },
+            "url": "{{baseUrl}}/Tickets"
+          }
+        },
+        {
+          "name": "Update Ticket",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"bookingId\": 1,\n  \"tripId\": 1,\n  \"tripSeatId\": 1,\n  \"pickupStopId\": 1,\n  \"dropoffStopId\": 2,\n  \"price\": 150000\n}"
+            },
+            "url": "{{baseUrl}}/Tickets/1"
+          }
+        },
+        {
+          "name": "Delete Ticket",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/Tickets/1"
+          }
+        }
+      ]
+    }
+  ]
+}

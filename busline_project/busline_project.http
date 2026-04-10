@@ -1,0 +1,6 @@
+@busline_project_HostAddress = http://localhost:5034
+
+GET {{busline_project_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
