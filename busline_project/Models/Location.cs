@@ -27,6 +27,8 @@ namespace busline_project.Models
     {
         Station = 0,   // Bến xe
         City = 1,  // Thành phố / tỉnh
-        Stop = 2   // Điểm dừng dọc đường
+        Stop = 2,   // Điểm dừng dọc đường
+        District = 3,
+        HIGHWAY = 4
     }
 }

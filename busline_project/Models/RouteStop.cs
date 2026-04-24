@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace busline_project.Models
 {
@@ -7,7 +8,6 @@ namespace busline_project.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
         public int RouteId { get; set; }
 
         [Required]
@@ -15,7 +15,7 @@ namespace busline_project.Models
 
         [Required]
         [Range(1, 1000)]
-        public int StopOrder { get; set; }  // 1 = xuất phát, 2, 3..., n = đích
+        public int StopOrder { get; set; }
 
         [Range(0, 10000)]
         public int? DistanceFromStartKm { get; set; }
@@ -23,8 +23,10 @@ namespace busline_project.Models
         [Range(0, 1440)]
         public int? EstimatedTimeFromStartMinutes { get; set; }
 
-        // Navigation
-        public Route Route { get; set; } = null!;
-        public Location Location { get; set; } = null!;
+        [JsonIgnore]
+        public Route? Route { get; set; }
+
+        [JsonIgnore]
+        public Location? Location { get; set; }
     }
 }

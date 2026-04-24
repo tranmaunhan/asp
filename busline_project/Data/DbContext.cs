@@ -1,4 +1,5 @@
-﻿using busline_project.Models;
+﻿using busline_project.Dtos;
+using busline_project.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace busline_project.Data
@@ -9,7 +10,7 @@ namespace busline_project.Data
             : base(options)
         {
         }
-
+        public DbSet<RouteViewModel> RouteViews { get; set; }
         // ────────────────────────────────────────────────
         // DbSets - Phần Người dùng & Phân quyền
         // ────────────────────────────────────────────────
@@ -41,6 +42,8 @@ namespace busline_project.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<RouteViewModel>().HasNoKey();
+
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<UserRole>()
@@ -140,9 +143,13 @@ namespace busline_project.Data
                 .IsUnique()
                 .HasDatabaseName("IX_RouteStop_RouteId_StopOrder_Unique");
 
+            // Use case-insensitive conversion for LocationType strings stored in DB
             modelBuilder.Entity<Location>()
                 .Property(l => l.Type)
-                .HasConversion<string>();
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (LocationType)Enum.Parse(typeof(LocationType), v, true)
+                );
 
             modelBuilder.Entity<RouteStop>()
                 .Property(rs => rs.StopOrder)

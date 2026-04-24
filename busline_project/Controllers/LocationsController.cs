@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace busline_project.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class LocationsController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -91,6 +91,19 @@ namespace busline_project.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        
+        [HttpGet("pickup-options")]
+        public async Task<ActionResult<IEnumerable<Location>>> GetPickupOptions()
+        {
+            var locations = await _context.Locations
+                .AsNoTracking()
+                .Where(l => l.Type != LocationType.HIGHWAY)
+                .OrderBy(l => l.Name)
+                .ToListAsync();
+
+            return Ok(locations);
         }
     }
 }
